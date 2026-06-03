@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flutter_ai_chat/main.dart';
+import 'package:flutter_ai_chat/app.dart';
 
 void main() {
   testWidgets('sends a message and shows a local AI reply', (
