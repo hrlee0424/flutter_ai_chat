@@ -11,6 +11,11 @@ class ChatState {
   final bool isSending;
   final String? errorMessage;
 
+  List<ChatMessage> get displayMessages =>
+      messages.where((message) => !message.isSystem).toList();
+
+  bool get hasError => errorMessage != null && errorMessage!.isNotEmpty;
+
   ChatState copyWith({
     List<ChatMessage>? messages,
     bool? isSending,

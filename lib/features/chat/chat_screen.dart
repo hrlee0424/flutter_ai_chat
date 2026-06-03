@@ -67,6 +67,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     final state = _chatController.state;
+    final displayMessages = state.displayMessages;
 
     return Scaffold(
       appBar: AppBar(
@@ -87,21 +88,21 @@ class _ChatScreenState extends State<ChatScreen> {
               child: ListView.builder(
                 controller: _scrollController,
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
-                itemCount: state.messages.length + (state.isSending ? 1 : 0),
+                itemCount: displayMessages.length + (state.isSending ? 1 : 0),
                 itemBuilder: (context, index) {
-                  if (state.isSending && index == state.messages.length) {
+                  if (state.isSending && index == displayMessages.length) {
                     return const TypingIndicator();
                   }
 
-                  return ChatBubble(message: state.messages[index]);
+                  return ChatBubble(message: displayMessages[index]);
                 },
               ),
             ),
-            if (state.errorMessage case final errorMessage?)
+            if (state.hasError)
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                 child: Text(
-                  errorMessage,
+                  state.errorMessage!,
                   style: TextStyle(color: Theme.of(context).colorScheme.error),
                 ),
               ),
